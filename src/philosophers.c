@@ -6,13 +6,12 @@
 /*   By: natferna <natferna@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 00:21:00 by natferna          #+#    #+#             */
-/*   Updated: 2025/05/16 01:55:46 by natferna         ###   ########.fr       */
+/*   Updated: 2025/05/17 01:05:50 by natferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosophers.h"
+#include "../inc/philo.h"
 
-/* imprime estado sin mezcla */
 void	print_state(t_philo *p, char *msg)
 {
 	pthread_mutex_lock(&p->rules->print_mutex);
@@ -44,7 +43,6 @@ int	create_philosophers(t_rules *rules, t_philo *ph)
 	return (0);
 }
 
-/* rutina de filósofo */
 void	*philosopher_routine(void *arg)
 {
 	t_philo	*p;

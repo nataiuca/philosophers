@@ -1,28 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sleep.c                                            :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: natferna <natferna@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/16 00:17:12 by natferna          #+#    #+#             */
-/*   Updated: 2025/05/17 00:54:01 by natferna         ###   ########.fr       */
+/*   Created: 2025/05/16 00:14:40 by natferna          #+#    #+#             */
+/*   Updated: 2025/05/17 00:53:48 by natferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/philo.h"
 
-void	precise_sleep(long ms)
+int	main(int ac, char **av)
 {
-	struct timeval	start;
-	struct timeval	now;
+	t_rules		rules;
+	t_philo		*ph;
+	pthread_t	mon;
 
-	gettimeofday(&start, NULL);
-	gettimeofday(&now, NULL);
-	while ((now.tv_sec - start.tv_sec) * 1000 + (now.tv_usec - start.tv_usec)
-		/ 1000 < ms)
-	{
-		usleep(500);
-		gettimeofday(&now, NULL);
-	}
+	if (init_rules(&rules, ac, av))
+		return (1);
+	ph = malloc(sizeof(t_philo) * rules.num_philos);
+	if (!ph)
+		return (write(2, "Error malloc\n", 14), 1);
+	if (create_philosophers(&rules, ph))
+		return (1);
+	pthread_create(&mon, NULL, monitor_routine, ph);
+	pthread_join(mon, NULL);
+	cleanup(ph, &rules);
+	return (0);
 }

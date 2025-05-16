@@ -6,17 +6,17 @@
 #    By: natferna <natferna@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/16 00:11:12 by natferna          #+#    #+#              #
-#    Updated: 2025/05/16 00:31:50 by natferna         ###   ########.fr        #
+#    Updated: 2025/05/17 01:06:21 by natferna         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = philosophers
+NAME = philo
 
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -pthread -I.
 
-SRCS = main.c src/die.c src/eat.c src/init.c \
-       src/philosophers.c src/sleep.c
+SRCS = src/main.c src/die.c src/eat.c src/init.c \
+       src/philosophers.c src/sleep.c src/utils.c
 OBJS = $(SRCS:.c=.o)
 
 all: $(NAME)

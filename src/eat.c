@@ -6,13 +6,12 @@
 /*   By: natferna <natferna@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 00:15:55 by natferna          #+#    #+#             */
-/*   Updated: 2025/05/16 01:51:00 by natferna         ###   ########.fr       */
+/*   Updated: 2025/05/17 00:53:35 by natferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosophers.h"
+#include "../inc/philo.h"
 
-/* toma dos tenedores */
 void	take_forks(t_philo *p)
 {
 	int	l;
@@ -26,7 +25,6 @@ void	take_forks(t_philo *p)
 	print_state(p, "has taken a fork");
 }
 
-/* come y libera tenedores con mutex en last_meal */
 void	eat_and_release(t_philo *p)
 {
 	t_rules	*r;

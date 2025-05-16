@@ -6,13 +6,12 @@
 /*   By: natferna <natferna@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 00:18:16 by natferna          #+#    #+#             */
-/*   Updated: 2025/05/16 01:55:12 by natferna         ###   ########.fr       */
+/*   Updated: 2025/05/17 01:04:50 by natferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosophers.h"
+#include "../inc/philo.h"
 
-/* tiempo en ms desde inicio */
 long	timestamp_ms(t_rules *r)
 {
 	struct timeval	now;
@@ -22,21 +21,22 @@ long	timestamp_ms(t_rules *r)
 			- r->start_time.tv_usec) / 1000);
 }
 
-/* inicializa reglas y mutexes; comprueba malloc */
 int	init_values(t_rules *r, int ac, char **av)
 {
-	r->num_philos = atoi(av[1]);
-	r->time_to_die = atol(av[2]);
-	r->time_to_eat = atol(av[3]);
-	r->time_to_sleep = atol(av[4]);
+	r->num_philos = ft_atoi(av[1]);
+	r->time_to_die = ft_atol(av[2]);
+	r->time_to_eat = ft_atol(av[3]);
+	r->time_to_sleep = ft_atol(av[4]);
 	if (ac == 6)
-		r->must_eat_count = atoi(av[5]);
+		r->must_eat_count = ft_atoi(av[5]);
 	else
 		r->must_eat_count = 0;
-	if (r->num_philos <= 0 || r->num_philos > 200 || r->time_to_die < 60
-		|| r->time_to_eat < 60 || r->time_to_sleep < 60
+	if (r->num_philos <= 0 || r->num_philos >= 200)
+		return (write(2, "Error: philosophers must be between 1 and 199\n", 46),
+			1);
+	if (r->time_to_die < 60 || r->time_to_eat < 60 || r->time_to_sleep < 60
 		|| r->must_eat_count < 0)
-		return (write(2, "Error: invalid argument values\n", 31), 1);
+		return (write(2, "Error: invalid argument values\n", 29), 1);
 	return (0);
 }
 
@@ -67,7 +67,6 @@ int	init_rules(t_rules *r, int ac, char **av)
 	return (0);
 }
 
-/* libera recursos */
 void	cleanup(t_philo *ph, t_rules *r)
 {
 	int	i;

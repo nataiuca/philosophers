@@ -6,11 +6,11 @@
 /*   By: natferna <natferna@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 00:18:57 by natferna          #+#    #+#             */
-/*   Updated: 2025/05/16 01:31:54 by natferna         ###   ########.fr       */
+/*   Updated: 2025/05/17 00:53:30 by natferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosophers.h"
+#include "../inc/philo.h"
 
 int	check_death(t_philo *ph, t_rules *r)
 {
